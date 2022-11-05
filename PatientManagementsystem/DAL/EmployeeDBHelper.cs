@@ -35,7 +35,7 @@ namespace EmployeeManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Designation",obj.Designation);
             cmd.Parameters.AddWithValue("@isactive",1);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
-
+            cmd.Parameters.AddWithValue("@UserName", obj.UserName);
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -77,9 +77,9 @@ namespace EmployeeManagementsystem.DAL
                             Department = Convert.ToString(dr["Department"]),
                             DOJ = Convert.ToDateTime(dr["DOJ"]),
                             Designation = Convert.ToString(dr["Designation"]),
-                            isactive = Convert.ToInt32(dr["isactive"]),
-                            Password = Convert.ToString(dr["Password"]),
-
+                            //isactive = Convert.ToInt32(dr["isactive"]),
+                            //Password = Convert.ToString(dr["Password"]),
+                            //UserName = Convert.ToString(dr["UserName"]),
 
                         });
                 }
@@ -119,6 +119,7 @@ namespace EmployeeManagementsystem.DAL
                 Employee.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
                 Employee.isactive = Convert.ToInt32(dt.Rows[0]["isactive"]);
                 Employee.Password = Convert.ToString(dt.Rows[0]["Password"]);
+                Employee.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
                 dt.Clear();
             }
             else

@@ -25,6 +25,7 @@ namespace DoctorManagementsystem.DAL
 
             cmd.Parameters.AddWithValue("@Doctor_id", obj.Doctor_id);
             cmd.Parameters.AddWithValue("@Doctor_Name", obj.Doctor_Name);
+            cmd.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             cmd.Parameters.AddWithValue("@Speciality", obj.Speciality);
             cmd.Parameters.AddWithValue("@Qualification", obj.Qualification);
             cmd.Parameters.AddWithValue("@D_PhoneNumber", obj.D_PhoneNumber);
@@ -44,13 +45,14 @@ namespace DoctorManagementsystem.DAL
         }
 
 
-        public List<Doctor> GetAll()
+        public List<Doctor> GetAll(int id)
         {
             Connection();
             List<Doctor> DoctorList = new List<Doctor>();
 
             SqlCommand cmd = new SqlCommand("GetAllDoctor", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hospital_id", id);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
@@ -67,6 +69,7 @@ namespace DoctorManagementsystem.DAL
                         {
                             Doctor_id = Convert.ToInt32(dr["Doctor_id"]),
                             Doctor_Name = Convert.ToString(dr["Doctor_Name"]),
+                            Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
                             Speciality = Convert.ToString(dr["Speciality"]),
                             Qualification = Convert.ToString(dr["Qualification"]),
                             D_PhoneNumber = Convert.ToString(dr["D_PhoneNumber"]),
@@ -85,7 +88,7 @@ namespace DoctorManagementsystem.DAL
             }
             return DoctorList;
         }
-
+        
         public Doctor GetDoctorById(int id)
         {
             Connection();
@@ -103,6 +106,7 @@ namespace DoctorManagementsystem.DAL
             {
                 Doctor.Doctor_id= Convert.ToInt32(dt.Rows[0]["Doctor_Id"]);
                 Doctor.Doctor_Name = Convert.ToString(dt.Rows[0]["Doctor_Name"]);
+                Doctor.Hospital_id= Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
                 Doctor.Speciality = Convert.ToString(dt.Rows[0]["Speciality"]);
                 Doctor.Qualification = Convert.ToString(dt.Rows[0]["Qualification"]);
                 Doctor.D_PhoneNumber = Convert.ToString(dt.Rows[0]["D_PhoneNumber"]);
@@ -129,6 +133,7 @@ namespace DoctorManagementsystem.DAL
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Doctor_id", obj.Doctor_id);
             com.Parameters.AddWithValue("@Doctor_Name", obj.Doctor_Name);
+            com.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             com.Parameters.AddWithValue("@Speciality", obj.Speciality);
             com.Parameters.AddWithValue("@Qualification", obj.Qualification);
             com.Parameters.AddWithValue("@D_PhoneNumber", obj.D_PhoneNumber);

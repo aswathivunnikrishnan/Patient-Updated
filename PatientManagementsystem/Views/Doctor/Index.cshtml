@@ -21,6 +21,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Doctor Name</th>
+            <th scope="col">Hospital Id</th>
             <th scope="col">Speciality</th>
             <th scope="col">Qualification</th>
             <th scope="col">Phone Number</th>
@@ -36,7 +37,7 @@
         $('#table_id').DataTable(
             {
                 "ajax": {
-                    url: "/Doctor/GetAllDoctors",
+                    url: "/Doctor/GetAllDoctors/" +@ViewBag.Hos_Id,
                     type: "Get",
                     dataType: "json",
                 },
@@ -45,6 +46,7 @@
 
                     { 'data': 'Doctor_id' },
                     { 'data': 'Doctor_Name' },
+                    { 'data': 'Hospital_id' },
                     { 'data': 'Speciality' },
                     { 'data': 'Qualification' },
                     { 'data': 'D_PhoneNumber' },

@@ -27,10 +27,13 @@ namespace PatientManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Product_id", obj.ProductId);
             cmd.Parameters.AddWithValue("@Product_Name", obj.ProductName);
             cmd.Parameters.AddWithValue("@Category", obj.Category);
-            cmd.Parameters.AddWithValue("@MinQuantity", obj.MinQuantity);
+            cmd.Parameters.AddWithValue("@BatchNumber", obj.BatchNumber);
+            cmd.Parameters.AddWithValue("@Min_Quantity", obj.MinQuantity);
             cmd.Parameters.AddWithValue("@Reorder", obj.Reorder);
             cmd.Parameters.AddWithValue("@UOM", obj.UOM);
-           
+            cmd.Parameters.AddWithValue("@Quantity", obj.Quantity);
+            cmd.Parameters.AddWithValue("@Expiary_Date", obj.ExpiryDate);
+
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -66,9 +69,12 @@ namespace PatientManagementsystem.DAL
                             ProductId = Convert.ToInt32(dr["Product_id"]),
                             ProductName = Convert.ToString(dr["Product_Name"]),
                             Category = Convert.ToString(dr["Category"]),
-                            MinQuantity = Convert.ToInt32(dr["MinQuantity"]),
+                            BatchNumber = Convert.ToString(dr["BatchNumber"]),
+                            MinQuantity = Convert.ToInt32(dr["Min_Quantity"]),
                             Reorder = Convert.ToString(dr["Reorder"]),
                             UOM = Convert.ToInt32(dr["UOM"]),
+                            Quantity = Convert.ToString(dr["Quantity"]),
+                            ExpiryDate = Convert.ToDateTime(dr["Expiary_Date"]),
 
                         });
                 }
@@ -99,10 +105,13 @@ namespace PatientManagementsystem.DAL
                 Product.ProductId = Convert.ToInt32(dt.Rows[0]["Product_id"]);
                 Product.ProductName = Convert.ToString(dt.Rows[0]["Product_Name"]);
                 Product.Category = Convert.ToString(dt.Rows[0]["Category"]);
+                Product.BatchNumber = Convert.ToString(dt.Rows[0]["BatchNumber"]);
                 Product.MinQuantity = Convert.ToInt32(dt.Rows[0]["MinQuantity"]);
                 Product.Reorder = Convert.ToString(dt.Rows[0]["Reorder"]);
                 Product.UOM = Convert.ToInt32(dt.Rows[0]["UOM"]);
-                
+                Product.Quantity = Convert.ToString(dt.Rows[0]["Quantity"]);
+                Product.ExpiryDate = Convert.ToDateTime(dt.Rows[0]["Expiary_Date"]);
+
                 dt.Clear();
             }
             else
@@ -124,10 +133,14 @@ namespace PatientManagementsystem.DAL
             com.Parameters.AddWithValue("@Product_id", obj.ProductId);
             com.Parameters.AddWithValue("@Product_Name", obj.ProductName);
             com.Parameters.AddWithValue("@Category", obj.Category);
+            com.Parameters.AddWithValue("@BatchNumber", obj.BatchNumber);
             com.Parameters.AddWithValue("@MinQuantity", obj.MinQuantity);
             com.Parameters.AddWithValue("@Reorder", obj.Reorder);
             com.Parameters.AddWithValue("@UOM", obj.UOM);
-            
+            com.Parameters.AddWithValue("@Quantity", obj.Quantity);
+            com.Parameters.AddWithValue("@Expiary_Date", obj.ExpiryDate);
+
+
             con.Open();
             int i = com.ExecuteNonQuery();
             con.Close();

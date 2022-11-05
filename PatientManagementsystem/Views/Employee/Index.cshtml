@@ -7,87 +7,98 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateEmployee")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOJ)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Designation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isactive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th></th>
-    </tr>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DOJ)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isactive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId })
-        </td>
-    </tr>
-}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+
+<table id="table_id" class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Department</th>
+            <th scope="col">DOJ</th>
+            <th scope="col">Designation</th>
+            @*<th scope="col">Action</th>*@
+        </tr>
+    </thead>
 
 </table>
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable(
+            {
+                "ajax": {
+                    url: "/Employee/GetAllEmployee",
+                    type: "Get",
+                    dataType: "json",
+                },
+
+                "columns": [
+
+                    { 'data': 'EmployeeId' },
+                    { 'data': 'FirstName' },
+                    { 'data': 'LastName' },
+                    { 'data': 'Gender' },
+                    { 'data': 'PhoneNumber' },
+                    { 'data': 'Address' },
+                    { 'data': 'Department' },
+                    { 'data': 'DOJ' },
+                    { 'data': 'Designation' }
+                    //{
+                    //    'data': 'EmployeeId', 'render': function (data) {
+                    //        return '<a class="orenge" title="Edit" onclick="editGetEmployee(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="Delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a>';
+                    //    }
+                    //}
+
+                ],
+                /*"serverSide": true,*/
+                /* "order": [1, "asc"],*/
+                "scrollY": "370px",
+                "scrollCollapse": false,
+
+            });
+
+
+    });
+
+
+    function editGetEmployee(id) {
+       /* $.post("/Patient/Edit/" + id);*/
+        window.location.href = "@Url.Action("Edit", "Employee")" +"/"+ id;
+    }
+
+    function Delete(id) {
+       window.location.href = "@Url.Action("Delete", "Employee")" +"/"+ id;
+    }
+
+
+
+
+
+</script>
+<style>
+
+    .orenge {
+        color: orange;
+        font-size: x-large;
+        cursor: pointer;
+    }
+
+    .red {
+        color: red;
+        font-size: x-large;
+        cursor: pointer;
+    }
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

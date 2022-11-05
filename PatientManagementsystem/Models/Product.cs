@@ -18,6 +18,8 @@ namespace PatientManagementsystem.Models
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
 
+        [Required(ErrorMessage = "Batch Number is required")]
+        public string BatchNumber { get; set; }
 
         [Required(ErrorMessage = "Min Quantity")]
         public int MinQuantity { get; set; }
@@ -25,8 +27,18 @@ namespace PatientManagementsystem.Models
         [Required]
         public string Reorder { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = " Unit of Measurement is required")]
         public int UOM { get; set; }
+
+
+        [Required(ErrorMessage = "Total Quantity is required")]
+        public string Quantity { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime ExpiryDate { get; set; }
 
 
     }

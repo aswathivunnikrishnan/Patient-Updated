@@ -49,7 +49,7 @@ namespace PatientManagementsystem.Controllers
 
         //Get :
 
-        public ActionResult GetAll()
+        public ActionResult GetAllProduct()
         {
 
             try

@@ -10,8 +10,9 @@ namespace DoctorManagementsystem.Controllers
     public class DoctorController : Controller
     {
         // GET: Doctor
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            ViewBag.Hos_Id = id;
             return View();
         }
 
@@ -47,13 +48,13 @@ namespace DoctorManagementsystem.Controllers
  
     //Get :
 
-    public ActionResult GetAllDoctors()
+    public ActionResult GetAllDoctors(int id)
     {
 
         try
         {
             DoctorDBHelper DBhelper = new DoctorDBHelper();
-            List<Doctor> patients = DBhelper.GetAll();
+            List<Doctor> patients = DBhelper.GetAll(id);
             return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
         }
         catch (Exception ex)
