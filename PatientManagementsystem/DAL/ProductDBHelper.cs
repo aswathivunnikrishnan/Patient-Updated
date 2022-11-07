@@ -26,6 +26,7 @@ namespace PatientManagementsystem.DAL
 
             cmd.Parameters.AddWithValue("@Product_id", obj.ProductId);
             cmd.Parameters.AddWithValue("@Product_Name", obj.ProductName);
+            cmd.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             cmd.Parameters.AddWithValue("@Category", obj.Category);
             cmd.Parameters.AddWithValue("@BatchNumber", obj.BatchNumber);
             cmd.Parameters.AddWithValue("@Min_Quantity", obj.MinQuantity);
@@ -45,13 +46,14 @@ namespace PatientManagementsystem.DAL
                 return false;
         }
 
-        public List<Product> GetAllProduct()
+        public List<Product> GetAllProduct(int id)
         {
             Connection();
             List<Product> ProductList = new List<Product>();
 
             SqlCommand cmd = new SqlCommand("GetAllProduct", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hospital_id", id);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
@@ -68,6 +70,7 @@ namespace PatientManagementsystem.DAL
                         {
                             ProductId = Convert.ToInt32(dr["Product_id"]),
                             ProductName = Convert.ToString(dr["Product_Name"]),
+                            Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
                             Category = Convert.ToString(dr["Category"]),
                             BatchNumber = Convert.ToString(dr["BatchNumber"]),
                             MinQuantity = Convert.ToInt32(dr["Min_Quantity"]),
@@ -104,6 +107,7 @@ namespace PatientManagementsystem.DAL
             {
                 Product.ProductId = Convert.ToInt32(dt.Rows[0]["Product_id"]);
                 Product.ProductName = Convert.ToString(dt.Rows[0]["Product_Name"]);
+                Product.Hospital_id = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
                 Product.Category = Convert.ToString(dt.Rows[0]["Category"]);
                 Product.BatchNumber = Convert.ToString(dt.Rows[0]["BatchNumber"]);
                 Product.MinQuantity = Convert.ToInt32(dt.Rows[0]["MinQuantity"]);
@@ -132,6 +136,7 @@ namespace PatientManagementsystem.DAL
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Product_id", obj.ProductId);
             com.Parameters.AddWithValue("@Product_Name", obj.ProductName);
+            com.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             com.Parameters.AddWithValue("@Category", obj.Category);
             com.Parameters.AddWithValue("@BatchNumber", obj.BatchNumber);
             com.Parameters.AddWithValue("@MinQuantity", obj.MinQuantity);

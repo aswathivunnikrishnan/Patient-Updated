@@ -11,8 +11,9 @@ namespace PatientManagementsystem.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            ViewBag.Hos_Id = id;
             return View();
         }
         // GET: /home/create
@@ -49,13 +50,13 @@ namespace PatientManagementsystem.Controllers
 
         //Get :
 
-        public ActionResult GetAllProduct()
+        public ActionResult GetAllProduct(int id)
         {
 
             try
             {
                 ProductDBHelper helper = new ProductDBHelper();
-                List<Product> Products = helper.GetAllProduct();
+                List<Product> Products = helper.GetAllProduct(id);
                 return Json(new { data = Products }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

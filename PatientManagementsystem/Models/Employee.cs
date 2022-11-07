@@ -19,6 +19,9 @@ namespace PatientManagementsystem.Models
         [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper last name")]
         public string LastName { get; set; }
 
+        [Required]
+        public int HospitalId { get; set; }
+
         [Required(ErrorMessage = "Gender is required")]
         public string Gender { get; set; }
 
@@ -47,7 +50,8 @@ namespace PatientManagementsystem.Models
         [Required]
         public int isactive { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Password { get; set; }
 
         [Required]

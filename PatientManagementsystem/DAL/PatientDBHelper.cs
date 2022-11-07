@@ -29,6 +29,7 @@ namespace PatientManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Patient_id", obj.Patient_Id);
             cmd.Parameters.AddWithValue("@Patient_FName", obj.FirstName);
             cmd.Parameters.AddWithValue("@Patient_lName", obj.LastName);
+            cmd.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             cmd.Parameters.AddWithValue("@Patient_Gender", obj.Gender);
             cmd.Parameters.AddWithValue("@Patient_Age", obj.Age);
             cmd.Parameters.AddWithValue("@Patient_Address", obj.Address);
@@ -46,13 +47,14 @@ namespace PatientManagementsystem.DAL
                 return false;
         }
 
-        public List<Patient> GetAll()
+        public List<Patient> GetAll(int id)
         {
             Connection();
             List<Patient> PatientList = new List<Patient>();
 
             SqlCommand cmd = new SqlCommand("GetAllPatients", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hospital_id", id);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
@@ -70,6 +72,7 @@ namespace PatientManagementsystem.DAL
                             Patient_Id = Convert.ToInt32(dr["Patient_id"]),
                             FirstName = Convert.ToString(dr["Patient_FName"]),
                             LastName = Convert.ToString(dr["Patient_LName"]),
+                            Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
                             Gender = Convert.ToString(dr["Patient_Gender"]),
                             Age = Convert.ToInt32(dr["Patient_Age"]),
                             Address = Convert.ToString(dr["Patient_Address"]),
@@ -106,6 +109,7 @@ namespace PatientManagementsystem.DAL
                 Patient.Patient_Id = Convert.ToInt32(dt.Rows[0]["Patient_Id"]);
                 Patient.FirstName = Convert.ToString(dt.Rows[0]["Patient_FName"]);
                 Patient.LastName = Convert.ToString(dt.Rows[0]["Patient_LName"]);
+                Patient.Hospital_id = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
                 Patient.Gender = Convert.ToString(dt.Rows[0]["Patient_Gender"]);
                 Patient.Age = Convert.ToInt32(dt.Rows[0]["Patient_Age"]);
                 Patient.Address = Convert.ToString(dt.Rows[0]["Patient_Address"]);
@@ -132,6 +136,7 @@ namespace PatientManagementsystem.DAL
             com.Parameters.AddWithValue("@Patient_id", obj.Patient_Id);
             com.Parameters.AddWithValue("@Patient_FName", obj.FirstName);
             com.Parameters.AddWithValue("@Patient_LName", obj.LastName);
+            com.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
             com.Parameters.AddWithValue("@Patient_Gender", obj.Gender);
             com.Parameters.AddWithValue("@Patient_Age", obj.Age);
             com.Parameters.AddWithValue("@Patient_Address", obj.Address);

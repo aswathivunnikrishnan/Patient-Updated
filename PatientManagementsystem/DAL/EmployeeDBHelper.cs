@@ -27,6 +27,7 @@ namespace EmployeeManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Employee_id", obj.EmployeeId);
             cmd.Parameters.AddWithValue("@Employee_FName", obj.FirstName);
             cmd.Parameters.AddWithValue("@Employee_LName", obj.LastName);
+            cmd.Parameters.AddWithValue("@Hospital_id", obj.HospitalId);
             cmd.Parameters.AddWithValue("@Employee_Gender", obj.Gender);
             cmd.Parameters.AddWithValue("@E_PhoneNumber", obj.PhoneNumber);
             cmd.Parameters.AddWithValue("@E_Address", obj.Address);
@@ -47,13 +48,14 @@ namespace EmployeeManagementsystem.DAL
                 return false;
         }
 
-        public List<Employee> GetAllEmployees()
+        public List<Employee> GetAllEmployees(int id)
         {
             Connection();
             List<Employee> EmployeeList = new List<Employee>();
 
             SqlCommand cmd = new SqlCommand("GetAllEmployee", con);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hospital_id", id);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
 
@@ -71,6 +73,7 @@ namespace EmployeeManagementsystem.DAL
                             EmployeeId = Convert.ToInt32(dr["Employee_id"]),
                             FirstName = Convert.ToString(dr["Employee_FName"]),
                             LastName = Convert.ToString(dr["Employee_LName"]),
+                            HospitalId = Convert.ToInt32(dr["Hospital_id"]),
                             Gender = Convert.ToString(dr["Employee_Gender"]),
                             PhoneNumber = Convert.ToString(dr["E_PhoneNumber"]),
                             Address = Convert.ToString(dr["E_Address"]),
@@ -110,6 +113,7 @@ namespace EmployeeManagementsystem.DAL
                 Employee.EmployeeId = Convert.ToInt32(dt.Rows[0]["Employee_id"]);
                 Employee.FirstName = Convert.ToString(dt.Rows[0]["Employee_FName"]);
                 Employee.LastName = Convert.ToString(dt.Rows[0]["Employee_LName"]);
+                Employee.HospitalId = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
                 Employee.Gender = Convert.ToString(dt.Rows[0]["Employee_Gender"]);
                 Employee.PhoneNumber = Convert.ToString(dt.Rows[0]["E_PhoneNumber"]);
                 Employee.Address = Convert.ToString(dt.Rows[0]["E_Address"]);
@@ -140,6 +144,7 @@ namespace EmployeeManagementsystem.DAL
             com.Parameters.AddWithValue("@Employee_id", obj.EmployeeId);
             com.Parameters.AddWithValue("@Employee_FName", obj.FirstName);
             com.Parameters.AddWithValue("@Employee_LName", obj.LastName);
+            com.Parameters.AddWithValue("@Hospital_id", obj.HospitalId);
             com.Parameters.AddWithValue("@Employee_Gender", obj.Gender);
             com.Parameters.AddWithValue("@E_PhoneNumber", obj.PhoneNumber);
             com.Parameters.AddWithValue("@E_Address", obj.Address);

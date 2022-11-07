@@ -21,14 +21,15 @@
         <tr>
             <th scope="col">Product Id</th>
             <th scope="col">Product Name</th>
+            <th scope="col">Hospital Id</th>
             <th scope="col">Category</th>
             <th scope="col">Batch Number</th>
-            <th scope="col">Minimun Quantity</th>
+            <th scope="col">Minimum Quantity</th>
             <th scope="col">Reorder</th>
             <th scope="col">UOM</th>
             <th scope="col">Quantity</th>
             <th scope="col">Expiry Date</th>
-            <th scope="col">Action</th>
+           <th scope="col">Action</th>
         </tr>
     </thead>
 
@@ -38,7 +39,7 @@
         $('#table_id').DataTable(
             {
                 "ajax": {
-                    url: "/Product/GetAllProduct",
+                    url: "/Product/GetAllProduct/" +@ViewBag.Hos_Id,
                     type: "Get",
                     dataType: "json",
                 },
@@ -47,13 +48,24 @@
 
                     { 'data': 'ProductId' },
                     { 'data': 'ProductName' },
+                    { 'data': 'Hospital_id' },
                     { 'data': 'Category' },
                     { 'data': 'BatchNumber' },
                     { 'data': 'MinQuantity' },
                     { 'data': 'Reorder' },
                     { 'data': 'UOM' },
                     { 'data': 'Quantity' },
-                    { 'data': 'ExpiryDate' },
+                    {
+                        'data': 'ExpiryDate', "render": function (value) {
+                            if (value === null) return "";
+                            var pattern = /Date\(([^)]+)\)/;//date format from server side
+                            var results = pattern.exec(value);
+                            var dt = new Date(parseFloat(results[1]));
+                            return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                        }
+},
+
+
                     {
                         'data': 'ProductId', 'render': function (data) {
                             return '<a class="orenge" title="Edit" onclick="editGetProduct(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="Delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a>';
@@ -72,8 +84,8 @@
     });
 
 
-    function editGetPatient(id) {
-       /* $.post("/Patient/Edit/" + id);*/
+    function editGetProduct(id) {
+      
         window.location.href = "@Url.Action("Edit", "Product")" +"/"+ id;
     }
 

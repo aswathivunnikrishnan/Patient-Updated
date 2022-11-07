@@ -11,8 +11,10 @@ namespace EmployeeManagementsystem.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+
+            ViewBag.Hos_Id = id;
             return View();
         }
 
@@ -51,13 +53,13 @@ namespace EmployeeManagementsystem.Controllers
 
         //Get :
 
-        public ActionResult GetAllEmployee()
+        public ActionResult GetAllEmployee(int id)
         {
 
             try
             {
                 EmployeeDBHelper DBhelper = new EmployeeDBHelper();
-                List<Employee> Employees = DBhelper.GetAllEmployees();
+                List<Employee> Employees = DBhelper.GetAllEmployees(id);
                 return Json(new { data = Employees }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

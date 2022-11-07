@@ -15,6 +15,11 @@ namespace PatientManagementsystem.Models
         [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper First name")]
         public string ProductName { get; set; }
 
+
+        [Required(ErrorMessage = "Hospital Id is Reguired")]
+        public int Hospital_id { get; set; }
+
+
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
 

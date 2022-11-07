@@ -13,8 +13,9 @@ namespace PatientManagementsystem.Controllers
     public class PatientController : Controller
     {
         // GET: Patient
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            ViewBag.Hos_Id = id;
             return View();
         }
 
@@ -52,13 +53,13 @@ namespace PatientManagementsystem.Controllers
 
         //Get :
         
-        public ActionResult GetAll()
+        public ActionResult GetAll(int id)
         {
 
             try
             {
                 PatientDBHelper helper = new PatientDBHelper();
-                List<Patient> patients = helper.GetAll();
+                List<Patient> patients = helper.GetAll(id);
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -72,8 +73,9 @@ namespace PatientManagementsystem.Controllers
         public ActionResult Edit(int id)
         {
             PatientDBHelper objDBHandle = new PatientDBHelper();
-           
-            
+             Patient objPatient = new Patient();
+
+
             var pat = objDBHandle.GetPatientById(id);
 
             

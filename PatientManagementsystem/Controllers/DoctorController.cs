@@ -32,7 +32,6 @@ namespace DoctorManagementsystem.Controllers
                 {
                     result = helper.CreateDoctorDetails(d);
                     ModelState.Clear();
-                    //return Json(result, JsonRequestBehavior.AllowGet);
                     return View("Index");
                 }
                 else
@@ -54,8 +53,8 @@ namespace DoctorManagementsystem.Controllers
         try
         {
             DoctorDBHelper DBhelper = new DoctorDBHelper();
-            List<Doctor> patients = DBhelper.GetAll(id);
-            return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
+            List<Employee> doctor = DBhelper.GetAll(id);
+            return Json(new { data = doctor }, JsonRequestBehavior.AllowGet);
         }
         catch (Exception ex)
         {

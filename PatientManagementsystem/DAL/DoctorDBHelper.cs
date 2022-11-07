@@ -29,7 +29,7 @@ namespace DoctorManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Speciality", obj.Speciality);
             cmd.Parameters.AddWithValue("@Qualification", obj.Qualification);
             cmd.Parameters.AddWithValue("@D_PhoneNumber", obj.D_PhoneNumber);
-           cmd.Parameters.AddWithValue("@No_of_Patientperday", obj.No_of_patientperday);
+            cmd.Parameters.AddWithValue("@No_of_Patientperday", obj.No_of_patientperday);
             cmd.Parameters.AddWithValue("@Fee", obj.Fee);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
             cmd.Parameters.AddWithValue("@DeletedStatus", 1);
@@ -45,12 +45,12 @@ namespace DoctorManagementsystem.DAL
         }
 
 
-        public List<Doctor> GetAll(int id)
+        public List<Employee> GetAll(int id)
         {
             Connection();
-            List<Doctor> DoctorList = new List<Doctor>();
+            List<Employee> DoctorList = new List<Employee>();
 
-            SqlCommand cmd = new SqlCommand("GetAllDoctor", con);
+            SqlCommand cmd = new SqlCommand("GetAllDoctors", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Hospital_id", id);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
@@ -65,17 +65,19 @@ namespace DoctorManagementsystem.DAL
                 foreach (DataRow dr in dt.Rows)
                 {
                     DoctorList.Add(
-                        new Doctor
+                        new Employee
                         {
-                            Doctor_id = Convert.ToInt32(dr["Doctor_id"]),
-                            Doctor_Name = Convert.ToString(dr["Doctor_Name"]),
-                            Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
-                            Speciality = Convert.ToString(dr["Speciality"]),
-                            Qualification = Convert.ToString(dr["Qualification"]),
-                            D_PhoneNumber = Convert.ToString(dr["D_PhoneNumber"]),
-                            No_of_patientperday = Convert.ToInt32(dr["No_of_patientperday"]),
-                            Fee = Convert.ToInt16(dr["Fee"]),
-                            Password = Convert.ToString(dr["Password"]),
+
+                            EmployeeId = Convert.ToInt32(dr["Employee_id"]),
+                            FirstName = Convert.ToString(dr["Employee_FName"]),
+                            LastName = Convert.ToString(dr["Employee_LName"]),
+                            HospitalId = Convert.ToInt32(dr["Hospital_id"]),
+                            Gender = Convert.ToString(dr["Employee_Gender"]),
+                            PhoneNumber = Convert.ToString(dr["E_PhoneNumber"]),
+                            Address = Convert.ToString(dr["E_Address"]),
+                            Department = Convert.ToString(dr["Department"]),
+                            DOJ = Convert.ToDateTime(dr["DOJ"]),
+                            Designation = Convert.ToString(dr["Designation"]),
 
 
 

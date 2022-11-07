@@ -19,6 +19,9 @@ namespace PatientManagementsystem.Models
         [RegularExpression("[A-Za-z ]{1,30}", ErrorMessage = "Give a proper last name")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "Hospital Id is Reguired")]
+        public int Hospital_id { get; set; }
+
         [Required(ErrorMessage = "Gender is required")]
         public string Gender { get; set; }
 

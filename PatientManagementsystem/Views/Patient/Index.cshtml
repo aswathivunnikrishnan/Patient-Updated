@@ -22,6 +22,7 @@
             <th scope="col">Id</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            <th scope="col">Hospital Id</th>
             <th scope="col">Gender</th>
             <th scope="col">Age</th>
             <th scope="col">Address</th>
@@ -37,7 +38,7 @@
         $('#table_id').DataTable(
             {
                 "ajax": {
-                    url: "/Patient/GetAll",
+                    url: "/Patient/GetAll/"+ @ViewBag.Hos_Id,
                     type: "Get",
                     dataType: "json",
                 },
@@ -47,6 +48,7 @@
                     { 'data': 'Patient_Id' },
                     { 'data': 'FirstName' },
                     { 'data': 'LastName' },
+                    { 'data': 'Hospital_id' },
                     { 'data': 'Gender' },
                     { 'data': 'Age' },
                     { 'data': 'Address' },

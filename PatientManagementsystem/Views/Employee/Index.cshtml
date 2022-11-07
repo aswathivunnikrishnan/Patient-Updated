@@ -22,13 +22,14 @@
             <th scope="col">Id</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            <th scope="col">Hospital Id</th>
             <th scope="col">Gender</th>
             <th scope="col">Phone Number</th>
             <th scope="col">Address</th>
             <th scope="col">Department</th>
             <th scope="col">DOJ</th>
             <th scope="col">Designation</th>
-            @*<th scope="col">Action</th>*@
+            <th scope="col">Action</th>
         </tr>
     </thead>
 
@@ -38,9 +39,9 @@
         $('#table_id').DataTable(
             {
                 "ajax": {
-                    url: "/Employee/GetAllEmployee",
+                    url: "/Employee/GetAllEmployee/" +@ViewBag.Hos_Id,
                     type: "Get",
-                    dataType: "json",
+                    dataType: "json"
                 },
 
                 "columns": [
@@ -48,23 +49,32 @@
                     { 'data': 'EmployeeId' },
                     { 'data': 'FirstName' },
                     { 'data': 'LastName' },
+                    { 'data': 'HospitalId' },
                     { 'data': 'Gender' },
                     { 'data': 'PhoneNumber' },
                     { 'data': 'Address' },
                     { 'data': 'Department' },
-                    { 'data': 'DOJ' },
-                    { 'data': 'Designation' }
-                    //{
-                    //    'data': 'EmployeeId', 'render': function (data) {
-                    //        return '<a class="orenge" title="Edit" onclick="editGetEmployee(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="Delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a>';
-                    //    }
-                    //}
+                    {
+                        'data': 'DOJ', "render": function (value) {
+                            if (value === null) return "";
+                            var pattern = /Date\(([^)]+)\)/;//date format from server side
+                            var results = pattern.exec(value);
+                            var dt = new Date(parseFloat(results[1]));
+                            return dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                        }
+                    },
+                    { 'data': 'Designation' },
+                    {
+                        'data': 'EmployeeId', 'render': function (data) {
+                            return '<a class="orenge" title="Edit" onclick="editGetEmployee(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="Delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a>';
+                        }
+                    }
 
                 ],
                 /*"serverSide": true,*/
                 /* "order": [1, "asc"],*/
                 "scrollY": "370px",
-                "scrollCollapse": false,
+                "scrollCollapse": false
 
             });
 
