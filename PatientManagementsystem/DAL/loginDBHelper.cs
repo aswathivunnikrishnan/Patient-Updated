@@ -57,38 +57,6 @@ namespace PatientManagementsystem.DAL
             return Employee;
         }
 
-        public Doctor GetDoctorByPhoneNumber(string PhoneNumber)
-        {
-            Connection();
-            Doctor Doctor = new Doctor();
-
-            SqlCommand cmd = new SqlCommand("GetByDoctorPhoneNumber", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@D_PhoneNumber", PhoneNumber);
-            SqlDataAdapter sd = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-
-            con.Open();
-            sd.Fill(dt);
-            con.Close();
-            if (dt.Rows.Count > 0)
-            {
-                Doctor.Doctor_id = Convert.ToInt32(dt.Rows[0]["Doctor_Id"]);
-                Doctor.Doctor_Name = Convert.ToString(dt.Rows[0]["Doctor_Name"]);
-                Doctor.Hospital_id = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
-                Doctor.Speciality = Convert.ToString(dt.Rows[0]["Speciality"]);
-                Doctor.Qualification = Convert.ToString(dt.Rows[0]["Qualification"]);
-                Doctor.D_PhoneNumber = Convert.ToString(dt.Rows[0]["D_PhoneNumber"]);
-                Doctor.No_of_patientperday = Convert.ToInt32(dt.Rows[0]["No_of_patientperday"]);
-                Doctor.Fee = Convert.ToInt32(dt.Rows[0]["Fee"]);
-                Doctor.Password = Convert.ToString(dt.Rows[0]["Password"]);
-                dt.Clear();
-            }
-            else
-            {
-                return null;
-            }
-            return Doctor;
-        }
+      
     }
 }

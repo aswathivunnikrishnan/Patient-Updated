@@ -95,6 +95,50 @@ namespace EmployeeManagementsystem.DAL
         }
 
 
+        public List<Employee> GetAllDoctor(int id)
+        {
+            Connection();
+            List<Employee> EmployeeList = new List<Employee>();
+
+            SqlCommand cmd = new SqlCommand("GetAllDoctors", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Hospital_id", id);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                con.Open();
+                sd.Fill(dt);
+                con.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    EmployeeList.Add(
+                        new Employee
+                        {
+                            EmployeeId = Convert.ToInt32(dr["Employee_id"]),
+                            FirstName = Convert.ToString(dr["Employee_FName"]),
+                            LastName = Convert.ToString(dr["Employee_LName"]),
+                            HospitalId = Convert.ToInt32(dr["Hospital_id"]),
+                            Gender = Convert.ToString(dr["Employee_Gender"]),
+                            PhoneNumber = Convert.ToString(dr["E_PhoneNumber"]),
+                            Address = Convert.ToString(dr["E_Address"]),
+                            Department = Convert.ToString(dr["Department"]),
+                            DOJ = Convert.ToDateTime(dr["DOJ"]),
+                            Designation = Convert.ToString(dr["Designation"]),
+                            
+
+                        });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return EmployeeList;
+        }
+
         public Employee GetEmployeeById(int id)
         {
             Connection();
@@ -117,7 +161,6 @@ namespace EmployeeManagementsystem.DAL
                 Employee.Gender = Convert.ToString(dt.Rows[0]["Employee_Gender"]);
                 Employee.PhoneNumber = Convert.ToString(dt.Rows[0]["E_PhoneNumber"]);
                 Employee.Address = Convert.ToString(dt.Rows[0]["E_Address"]);
-                Employee.PhoneNumber = Convert.ToString(dt.Rows[0]["PhoneNumber"]);
                 Employee.Department = Convert.ToString(dt.Rows[0]["Department"]);
                 Employee.DOJ = Convert.ToDateTime(dt.Rows[0]["DOJ"]);
                 Employee.Designation = Convert.ToString(dt.Rows[0]["Designation"]);
@@ -152,7 +195,7 @@ namespace EmployeeManagementsystem.DAL
             com.Parameters.AddWithValue("@DOJ", obj.DOJ);
             com.Parameters.AddWithValue("@Designation", obj.Designation);
             com.Parameters.AddWithValue("@isactive", 1);
-            com.Parameters.AddWithValue("@Password", obj.Password);
+            //com.Parameters.AddWithValue("@Password", obj.Password);
 
 
             con.Open();
@@ -188,5 +231,7 @@ namespace EmployeeManagementsystem.DAL
             else
                 return false;
         }
+
+        
     }
 }

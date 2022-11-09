@@ -34,8 +34,8 @@ namespace PatientManagementsystem.Controllers
                 {
                     result = helper.CreateProductDetails(p);
                     ModelState.Clear();
-                    //return Json(result, JsonRequestBehavior.AllowGet);
-                    return View("Index");
+                    TempData["msg"] = "<script>alert('Product Created Successfully')</script>";
+                    return RedirectToAction("Index", "Product", new { id = p.Hospital_id });
                 }
                 else
                     return View();
@@ -91,7 +91,9 @@ namespace PatientManagementsystem.Controllers
 
                     ProductDBHelper objDBHandle = new ProductDBHelper();
                     objDBHandle.UpdateProduct(objProduct);
-                    return RedirectToAction("Index");
+                    TempData["msg"] = "<script>alert('Product Updated Successfully')</script>";
+                    return RedirectToAction("Index", "Product", new { id = objProduct.Hospital_id });
+                    
                 }
                 else
                 {

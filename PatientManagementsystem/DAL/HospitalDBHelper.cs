@@ -30,6 +30,7 @@ namespace PatientManagementsystem.DAL
             cmd.Parameters.AddWithValue("@District", obj.District);
             cmd.Parameters.AddWithValue("@City", obj.City);
             cmd.Parameters.AddWithValue("@Office_PhoneNumber", obj.Office_PhoneNumber);
+
             
 
             con.Open();

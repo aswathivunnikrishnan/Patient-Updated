@@ -23,10 +23,7 @@
 </head>
 <body>
 
-
-
     <nav class="main-menu">
-
 
 
         @*<div>
@@ -45,9 +42,6 @@
                     </a>
                 </li>
 
-              
-
-
                 <li>
                     <a href="">
                         <i class="fa fa-envelope-o fa-xlg icon-s"></i>
@@ -55,52 +49,45 @@
                     </a>
                 </li>
 
-
-  
-                <li class="darkerlishadow">
-                    <a onclick="GotoPatients()">
-                        <i class="fa fa-users fa-xlg icon-s"></i>
-                        <span class="nav-text">Patients</span>
-                    </a>
                 </li>
+                @if (User.IsInRole("Doctor") || User.IsInRole("Admin"))
+                {
+                    <li class="darkerlishadow">
+                        <a onclick="GotoPatients()">
+                            <i class="fa fa-users fa-xlg icon-s"></i>
+                            <span class="nav-text">Patients</span>
+                        </a>
+                    </li>
+                }
+                    @if (User.IsInRole("Pharmacist") || User.IsInRole("Admin"))
+                    {
+                        <li class="darkerli">
+                            <a onclick="GotoProducts()">
+                                <i class="fa fa-flask fa-xlg icon-s"></i>
+                                <span class="nav-text">Pharmacy</span>
+                            </a>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="darkerli">
+                            <a onclick="GotoDoctors()">
+                                <i class="fa fa-user-md fa-xlg icon-s"></i>
+                                <span class="nav-text">Doctors</span>
+                            </a>
+                        </li>
 
-                <li class="darkerli">
-                    <a onclick="GotoProducts()">
-                        <i class="fa fa-flask fa-xlg icon-s"></i>
-                        <span class="nav-text">Pharmacy</span>
-                    </a>
-                </li>
-
-                <li class="darkerli">
-                    <a onclick="GotoDoctors()">
-                        <i class="fa fa-user-md fa-xlg icon-s"></i>
-                        <span class="nav-text">Doctors</span>
-                    </a>
-                </li>
-
-                <li class="darkerli">
-                    <a onclick="GotoEmployees()">
-                        <i class="fa fa-user fa-xlg icon-s"></i>
-                        <span class="nav-text">Employees</span>
-                    </a>
-                </li>
-
-               
-
-
-            </ul>
-
-
-           
-
-
+                        <li class="darkerli">
+                            <a onclick="GotoEmployees()">
+                                <i class="fa fa-user fa-xlg icon-s"></i>
+                                <span class="nav-text">Employees</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
            
     </nav>
-
-
-
-
-
 
 </body>
 </html>
@@ -114,7 +101,7 @@
     }
 
     function GotoDoctors(){
-        window.location.href = "@Url.Action("Index", "Doctor")" + "/" + @ViewBag.Hos_Id;
+        window.location.href = "@Url.Action("DoctorIndex", "Employee")" + "/" + @ViewBag.Hos_Id;
         
     }
 

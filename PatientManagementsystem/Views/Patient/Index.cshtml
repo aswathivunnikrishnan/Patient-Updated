@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Patients</h2>
 
 <p>
     @Html.ActionLink("Create New", "CreatePatient")
@@ -15,7 +15,14 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
-
+@if (TempData["error"] != null)
+{
+    @Html.Raw(TempData["error"]);
+}
+@if (TempData["msg"] != null)
+{
+    @Html.Raw(TempData["msg"]);
+}
 <table id="table_id" class="table">
     <thead class="thead-dark">
         <tr>
@@ -88,11 +95,12 @@
 </script>
 <style>
 
-    .orenge{
-        color:orange;
-        font-size:x-large;
-        cursor:pointer;
+    .orenge {
+        color: orange;
+        font-size: x-large;
+        cursor: pointer;
     }
+
     .red {
         color: red;
         font-size: x-large;

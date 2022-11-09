@@ -37,8 +37,8 @@ namespace PatientManagementsystem.Controllers
                 {
                     result = helper.CreatePatientDetails(p);
                     ModelState.Clear();
-                  
-                    return View("Index");
+                    TempData["msg"] = "<script>alert('Patient Created Successfully')</script>";
+                    return RedirectToAction("Index", "Patient", new { id = p.Hospital_id });
                 }
                 else
                     return View();
@@ -95,7 +95,10 @@ namespace PatientManagementsystem.Controllers
 
                     PatientDBHelper objDBHandle = new PatientDBHelper();
                     objDBHandle.UpdatePatient(objPatient);
-                    return RedirectToAction("Index");
+                    //return RedirectToAction("Index");
+                    TempData["msg"] = "<script>alert('Patient Updated Successfully')</script>";
+                    return RedirectToAction("Index", "Patient", new { id = objPatient.Hospital_id });
+
                 }
                 else
                 {
@@ -105,8 +108,11 @@ namespace PatientManagementsystem.Controllers
             }
             catch (Exception ex)
             {
-                ViewData["Error"] = ex.Message;
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", ex.Message + ex.StackTrace);
+
+                //return RedirectToAction("Index");
+                return View(objPatient);
+
             }
             finally
             {
@@ -132,13 +138,17 @@ namespace PatientManagementsystem.Controllers
             try
             {
                 PatientDBHelper objDBHandle = new PatientDBHelper();
+                PatientDBHelper helper = new PatientDBHelper();
+                Patient objPatient = helper.GetPatientById(id);
                 result = objDBHandle.DeleteData(id);
+                TempData["msg"] = "<script>alert('Patient Deleted Successfully')</script>";
+                return RedirectToAction("Index", "Patient", new { id = objPatient.Hospital_id });
             }
             catch (Exception ex)
             {
-                throw ex;
+                ModelState.AddModelError("", ex.Message + ex.StackTrace);
+                return View();
             }
-            return RedirectToAction("Index");
         }
 
     }

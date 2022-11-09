@@ -126,13 +126,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="DAL\DoctorDBHelper.cs" />
     <Compile Include="DAL\EmployeeDBHelper.cs" />
     <Compile Include="DAL\HospitalDBHelper.cs" />
     <Compile Include="DAL\loginDBHelper.cs" />
@@ -141,12 +139,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\login.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,12 +184,7 @@
     <Content Include="Views\Hospital\Edit.cshtml" />
     <Content Include="Views\Hospital\Delete.cshtml" />
     <Content Include="Views\Hospital\Index.cshtml" />
-    <Content Include="Views\Doctor\Index.cshtml" />
-    <Content Include="Views\Doctor\CreateDoctor.cshtml" />
-    <Content Include="Views\Doctor\Edit.cshtml" />
-    <Content Include="Views\Doctor\Delete.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Employee\Delete.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Admin\DashBoard.cshtml" />
     <Content Include="Views\Employee\CreateEmployee.cshtml" />
@@ -199,6 +192,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Product\CreateProduct.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Employee\DoctorIndex.cshtml" />
+    <Content Include="Views\Employee\EditDoctor.cshtml" />
+    <Content Include="Views\Employee\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

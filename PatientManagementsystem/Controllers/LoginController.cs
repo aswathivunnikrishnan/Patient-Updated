@@ -15,64 +15,52 @@ namespace PatientManagementsystem.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            login log= new login();
+            log.HospitalName= new SelectList(getdropdown(), "Value", "Text");
+            return View(log);
         }
 
         [HttpPost]
         public ActionResult Login(login loginview)
         {
             loginDBHelper db = new loginDBHelper();
-           
-            if (ModelState.IsValid)
-            {
+            login log = new login();
+            log.HospitalName = new SelectList(getdropdown(), "Value", "Text");
 
+            if (TryValidateModel(loginview))
+            {
+                loginview.HospitalID = Convert.ToInt32(loginview.H_Name);
                 Employee emp = db.GetEmployeeByUserName(loginview.UserName);
-                Doctor doc = db.GetDoctorByPhoneNumber(loginview.UserName);
+                //Doctor doc = db.GetDoctorByPhoneNumber(loginview.UserName);
                 if (emp != null)
                 {
                     if (emp.UserName == loginview.UserName && emp.Password == loginview.Password)
                     {
-                        if (emp.HospitalId == loginview.HospitalID)
+                        if(emp.Designation=="ADMIN")
                         {
                             FormsAuthentication.SetAuthCookie(loginview.UserName, true);
                             return RedirectToAction("Index", "Hospital");
                         }
-                        else
-                            ModelState.AddModelError("", "Invalid Hospital id");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Invalid password");
-
-                    }
-                    return View();
-                }
-                else if (doc != null)
-                {
-
-                    if (doc.D_PhoneNumber == loginview.UserName && doc.Password == loginview.Password)
-                    {
-                        if (doc.Hospital_id == loginview.HospitalID)
+                        else if(emp.HospitalId == loginview.HospitalID)
                         {
                             FormsAuthentication.SetAuthCookie(loginview.UserName, true);
-                            return RedirectToAction("Index", "Patient");
-
+                            return RedirectToAction("DashBoard", "Admin",new {id=emp.HospitalId});
                         }
                         else
                             ModelState.AddModelError("", "Invalid Hospital id");
-
                     }
                     else
+                    {
                         ModelState.AddModelError("", "Invalid password");
-                    return View();
+
+                    }
+                    return View(log);
                 }
-                else
-                {
-                    ModelState.AddModelError("", " Not a Registered user");
-                    return View();
-                }
+                ModelState.AddModelError("", "Not a Registered User");
+
+                return View(log);
             }
-            return View();
+            return View(log);
 
            
 
@@ -84,5 +72,20 @@ namespace PatientManagementsystem.Controllers
             FormsAuthentication.RedirectToLoginPage();
             return RedirectToAction("login", "login");
         }
+
+        private List<SelectListItem> getdropdown()
+        {
+            HospitalDBHelper hospitalDB= new HospitalDBHelper();
+            List<Hospital> hospitals = hospitalDB.GetAllHospitalDetails();
+            List<SelectListItem> dropdown = new List<SelectListItem>();
+
+            foreach (var x in hospitals)
+            {
+                var item = new SelectListItem { Text = x.Hospital_Name, Value = x.Hospital_Id.ToString() };
+                dropdown.Add(item);
+            }
+            return dropdown;
+        }
     }
+
 }

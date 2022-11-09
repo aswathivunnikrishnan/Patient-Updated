@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PatientManagementsystem.Models
 {
@@ -16,8 +17,12 @@ namespace PatientManagementsystem.Models
        
         public string Password { get; set; }
 
-        [Required]
+    
         public int HospitalID { get; set; }
+        public SelectList HospitalName{ get; set; }
+        [Required]
+        [Display(Name = "Hospital Name")]
+        public string H_Name { get; set; }
 
     }
 }

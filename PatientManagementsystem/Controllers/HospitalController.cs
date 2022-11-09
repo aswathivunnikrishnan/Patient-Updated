@@ -11,6 +11,7 @@ namespace PatientManagementsystem.Controllers
     public class HospitalController : Controller
     {
         // GET: Hospital
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();

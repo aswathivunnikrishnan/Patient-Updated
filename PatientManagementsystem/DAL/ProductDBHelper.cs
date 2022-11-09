@@ -110,7 +110,7 @@ namespace PatientManagementsystem.DAL
                 Product.Hospital_id = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
                 Product.Category = Convert.ToString(dt.Rows[0]["Category"]);
                 Product.BatchNumber = Convert.ToString(dt.Rows[0]["BatchNumber"]);
-                Product.MinQuantity = Convert.ToInt32(dt.Rows[0]["MinQuantity"]);
+                Product.MinQuantity = Convert.ToInt32(dt.Rows[0]["Min_Quantity"]);
                 Product.Reorder = Convert.ToString(dt.Rows[0]["Reorder"]);
                 Product.UOM = Convert.ToInt32(dt.Rows[0]["UOM"]);
                 Product.Quantity = Convert.ToString(dt.Rows[0]["Quantity"]);
