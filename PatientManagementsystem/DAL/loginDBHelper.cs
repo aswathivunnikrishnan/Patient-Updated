@@ -47,6 +47,7 @@ namespace PatientManagementsystem.DAL
                 Employee.isactive = Convert.ToInt32(dt.Rows[0]["isactive"]);
                 Employee.Password = Convert.ToString(dt.Rows[0]["Password"]);
                 Employee.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
+                Employee.Admin = Convert.ToBoolean(dt.Rows[0]["Admin"]);
                 dt.Clear();
             }
             else

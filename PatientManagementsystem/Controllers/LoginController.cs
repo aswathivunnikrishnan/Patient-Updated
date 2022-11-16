@@ -36,7 +36,7 @@ namespace PatientManagementsystem.Controllers
                 {
                     if (emp.UserName == loginview.UserName && emp.Password == loginview.Password)
                     {
-                        if(emp.Designation=="ADMIN")
+                        if(emp.Designation== "SUPERADMIN")
                         {
                             FormsAuthentication.SetAuthCookie(loginview.UserName, true);
                             return RedirectToAction("Index", "Hospital");

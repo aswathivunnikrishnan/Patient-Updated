@@ -20,7 +20,7 @@ namespace PatientManagementsystem.Models
     
         public int HospitalID { get; set; }
         public SelectList HospitalName{ get; set; }
-        [Required]
+       
         [Display(Name = "Hospital Name")]
         public string H_Name { get; set; }
 

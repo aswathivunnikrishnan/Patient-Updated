@@ -41,7 +41,11 @@ namespace PatientManagementsystem.Models
             loginDBHelper login = new loginDBHelper();
             Employee employee =login.GetEmployeeByUserName(username);   
             List<string> role = new List<string>();
-            if(employee.Designation== "ADMIN")
+            if (employee.Designation == "SUPERADMIN")
+            {
+                role.Add("SuperAdmin");
+            }
+            else if (employee.Admin== true)
             {
                 role.Add("Admin");
             }

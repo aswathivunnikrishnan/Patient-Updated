@@ -78,17 +78,17 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Department, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Department, new SelectList(new[]
-         {
-            "Cardio",
-            "Psychiatry",
-            "Orthopaedic",
-            "Neurology",
-            "Gynaecology",
-            "General"
+            @Html.DropDownListFor(model => model.Department, new SelectList(new[]
+     {
+        "Cardio",
+        "Psychiatry",
+        "Orthopaedic",
+        "Neurology",
+        "Gynaecology",
+        "General"
 
-        }), "---- Select One ----", new { @class = "form-control" })
-               
+    }), "---- Select One ----", new { @class = "form-control" })
+
             @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -125,8 +125,17 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",@type="password" } })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Admin, "Admin", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(model => model.Admin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Admin, "", new { @class = "text-danger" })
         </div>
     </div>
 

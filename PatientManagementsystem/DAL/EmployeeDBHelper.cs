@@ -37,6 +37,8 @@ namespace EmployeeManagementsystem.DAL
             cmd.Parameters.AddWithValue("@isactive",1);
             cmd.Parameters.AddWithValue("@Password", obj.Password);
             cmd.Parameters.AddWithValue("@UserName", obj.UserName);
+            cmd.Parameters.AddWithValue("@Admin", obj.Admin);
+
 
             con.Open();
             int i = cmd.ExecuteNonQuery();
@@ -167,6 +169,7 @@ namespace EmployeeManagementsystem.DAL
                 Employee.isactive = Convert.ToInt32(dt.Rows[0]["isactive"]);
                 Employee.Password = Convert.ToString(dt.Rows[0]["Password"]);
                 Employee.UserName = Convert.ToString(dt.Rows[0]["UserName"]);
+                Employee.Admin = Convert.ToBoolean(dt.Rows[0]["Admin"]);
                 dt.Clear();
             }
             else
@@ -195,6 +198,7 @@ namespace EmployeeManagementsystem.DAL
             com.Parameters.AddWithValue("@DOJ", obj.DOJ);
             com.Parameters.AddWithValue("@Designation", obj.Designation);
             com.Parameters.AddWithValue("@isactive", 1);
+            com.Parameters.AddWithValue("@Admin", obj.Admin);
             //com.Parameters.AddWithValue("@Password", obj.Password);
 
 

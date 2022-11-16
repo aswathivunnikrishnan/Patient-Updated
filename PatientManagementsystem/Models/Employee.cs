@@ -56,5 +56,7 @@ namespace PatientManagementsystem.Models
 
         [Required]
         public string UserName { get; set; }
+
+        public bool Admin { get; set; }
     }
 }
