@@ -4,8 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Style/css/app.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
@@ -31,7 +33,7 @@
         </div>
     </div>
     
-    <div class="container">
+    @*<div class="container">
         <ul class="nav navbar-nav navbar-right">
             @if (User.Identity.IsAuthenticated)
             {
@@ -39,7 +41,8 @@
             }
 
         </ul>
-    </div>
+    </div>*@
+
     <div class="container body-content">
 
         @RenderBody()

@@ -16,7 +16,7 @@ namespace PatientManagementsystem.Models
         public string ProductName { get; set; }
 
 
-        [Required(ErrorMessage = "Hospital Id is Reguired")]
+        
         public int Hospital_id { get; set; }
 
 
