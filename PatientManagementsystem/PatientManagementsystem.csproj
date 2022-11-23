@@ -104,6 +104,10 @@
     <Content Include="Image\Doctor.jpg" />
     <Content Include="Image\Heart.jpg" />
     <Content Include="Image\OIP.jpg" />
+    <Content Include="Image\s1.png" />
+    <Content Include="Image\s2.png" />
+    <Content Include="Image\s3.png" />
+    <Content Include="Image\s4.png" />
     <Content Include="Image\Stethoscope.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -267,6 +271,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Scripts\jquery-3.6.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.1.min.map" />
+    <Content Include="Views\Admin\Cardiology.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

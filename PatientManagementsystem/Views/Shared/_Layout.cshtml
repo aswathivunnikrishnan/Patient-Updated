@@ -12,11 +12,11 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <!--<div class="container">
             <a class="icon-bar" href="/Doctor/Index" style="color: white; margin-left:-15%;cursor:pointer">Doctor</a>
             <a class="icon-bar" href="/Employee/Index" style="color: white; margin-left: -15%;cursor:pointer">Employee</a>
             <a class="icon-bar" href="/Hospital/Index" style="color: white; margin-left: -10%;cursor:pointer">Hospital</a>
-            <div class="navbar-header">
+            <div class="navbar-header">-->
 
                 @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -24,31 +24,37 @@
                         <span class="icon-bar"></span>
                     </button>*@
                 @* @Html.ActionLink("PATIENT MANAGEMENT SYSTEM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-            </div>
+            <!--</div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
 
-            </div>
-        </div>
+            </div>-->
+        @*</div>*@
     </div>
-    
-    @*<div class="container">
-        <ul class="nav navbar-nav navbar-right">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li><a class="btn btn-danger" href="/Login/Logout/"><span class="glyphicon glyphicon-user" style="color:green">@User.Identity.Name</span><br />Click to LogOut</a></li>
-            }
+    <br />
+    <div class="container row">
+        <div class=" col-10">
 
-        </ul>
-    </div>*@
+        </div>
+        <div class="col-2">
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a class="btn btn-primary" href="/Login/Logout/"><span class="glyphicon glyphicon-user" style="color:black">@User.Identity.Name</span><br />Click to LogOut</a></li>
+                }
+
+            </ul>
+        </div>
+        
+    </div>
 
     <div class="container body-content">
 
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Patient Management System</p>
         </footer>
     </div>
 

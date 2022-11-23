@@ -7,7 +7,7 @@
 <h2>Doctor Details</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateEmployee")
+    @Html.ActionLink("Create New", "CreateEmployee", new {id= @ViewBag.Hos_Id})
 </p>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
@@ -112,3 +112,18 @@
 </style>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div>
+    @*@Html.ActionLink("Back to Index", "Index", "Employee", new { id = ViewBag.Hos_Id })*@
+    <a onclick="GotoDashBoard()">
+
+        <span class="nav-text">Back to DashBoard</span>
+    </a>
+</div>
+
+<script>
+    function GotoDashBoard() {
+        window.location.href = "@Url.Action("DashBoard", "Admin")" + "/" + @ViewBag.Hos_Id ;
+    }
+
+</script>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Xml.Linq;
 
 namespace PatientManagementsystem.Controllers
 {
@@ -26,6 +27,8 @@ namespace PatientManagementsystem.Controllers
             loginDBHelper db = new loginDBHelper();
             login log = new login();
             log.HospitalName = new SelectList(getdropdown(), "Value", "Text");
+          HospitalDBHelper hospitalDBHelper = new HospitalDBHelper();
+
 
             if (TryValidateModel(loginview))
             {
@@ -43,8 +46,9 @@ namespace PatientManagementsystem.Controllers
                         }
                         else if(emp.HospitalId == loginview.HospitalID)
                         {
+                            Hospital hos = hospitalDBHelper.GetHospitalDetailsById(emp.HospitalId);
                             FormsAuthentication.SetAuthCookie(loginview.UserName, true);
-                            return RedirectToAction("DashBoard", "Admin",new {id=emp.HospitalId});
+                            return RedirectToAction("DashBoard", "Admin",new {id=emp.HospitalId, name = hos.Hospital_Name });
                         }
                         else
                             ModelState.AddModelError("", "Invalid Hospital id");
