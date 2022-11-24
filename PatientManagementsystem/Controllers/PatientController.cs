@@ -1,4 +1,5 @@
-﻿using PatientManagementsystem.DAL;
+﻿using EmployeeManagementsystem.DAL;
+using PatientManagementsystem.DAL;
 using PatientManagementsystem.Models;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,10 @@ using System.Web.Services.Description;
 
 namespace PatientManagementsystem.Controllers
 {
+   
     public class PatientController : Controller
     {
+        loginDBHelper edb = new loginDBHelper();
         // GET: Patient
         public ActionResult Index(int id)
         {
@@ -58,8 +61,16 @@ namespace PatientManagementsystem.Controllers
 
             try
             {
+                List<Patient> patients = new List<Patient>();
+
                 PatientDBHelper helper = new PatientDBHelper();
-                List<Patient> patients = helper.GetAll(id);
+                if (HttpContext.User.IsInRole("Admin"))
+                {
+                    patients = helper.GetAll(id);
+                    return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
+                }
+                Employee emp = edb.GetEmployeeByUserName(HttpContext.User.Identity.Name.ToString());
+                patients = helper.GetPatientsByDoctorId(emp.EmployeeId,id);
                 return Json(new { data = patients }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -69,6 +80,8 @@ namespace PatientManagementsystem.Controllers
             }
             
         }
+
+       
 
         public ActionResult Edit(int id)
         {

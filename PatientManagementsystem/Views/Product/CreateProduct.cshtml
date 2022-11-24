@@ -108,16 +108,14 @@
     </div>
 }
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index", "Product")
-
-</div>*@
 <div>
-    
-    <a onclick="GotoProductIndex()">
+    @Html.ActionLink("Back to List", "Index", new{  id= @ViewBag.Hos_Id})
 
-        <span class="nav-text">Back to list</span>
-    </a>
+</div>
+
+@*<div style="margin:20px;">
+    
+    <button type="button" onclick="GotoProductIndex()"> back to list</button>
 </div>
 
 <script>
@@ -125,4 +123,4 @@
         window.location.href = "@Url.Action("Index", "Product")" + "/" + @ViewBag.Hos_Id ;
     }
 
-</script>
+</script>*@

@@ -30,6 +30,7 @@ namespace PatientManagementsystem.DAL
             cmd.Parameters.AddWithValue("@Patient_FName", obj.FirstName);
             cmd.Parameters.AddWithValue("@Patient_lName", obj.LastName);
             cmd.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
+            cmd.Parameters.AddWithValue("@Doctor_id", obj.Doctor_id);
             cmd.Parameters.AddWithValue("@Patient_Gender", obj.Gender);
             cmd.Parameters.AddWithValue("@Patient_Age", obj.Age);
             cmd.Parameters.AddWithValue("@Patient_Address", obj.Address);
@@ -73,6 +74,7 @@ namespace PatientManagementsystem.DAL
                             FirstName = Convert.ToString(dr["Patient_FName"]),
                             LastName = Convert.ToString(dr["Patient_LName"]),
                             Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
+                            Doctor_id = Convert.ToInt32(dr["Doctor_id"]),
                             Gender = Convert.ToString(dr["Patient_Gender"]),
                             Age = Convert.ToInt32(dr["Patient_Age"]),
                             Address = Convert.ToString(dr["Patient_Address"]),
@@ -110,6 +112,7 @@ namespace PatientManagementsystem.DAL
                 Patient.FirstName = Convert.ToString(dt.Rows[0]["Patient_FName"]);
                 Patient.LastName = Convert.ToString(dt.Rows[0]["Patient_LName"]);
                 Patient.Hospital_id = Convert.ToInt32(dt.Rows[0]["Hospital_id"]);
+                Patient.Doctor_id = Convert.ToInt32(dt.Rows[0]["Doctor_id"]);
                 Patient.Gender = Convert.ToString(dt.Rows[0]["Patient_Gender"]);
                 Patient.Age = Convert.ToInt32(dt.Rows[0]["Patient_Age"]);
                 Patient.Address = Convert.ToString(dt.Rows[0]["Patient_Address"]);
@@ -125,6 +128,53 @@ namespace PatientManagementsystem.DAL
             return Patient;
         }
 
+        public List<Patient> GetPatientsByDoctorId(int id, int HospitalId)
+        {
+            Connection();
+            List<Patient> PatientList = new List<Patient>();
+
+            SqlCommand cmd = new SqlCommand("GetPatientsByDoctorId", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Employee_id", id);
+            cmd.Parameters.AddWithValue("@Hospital_id", HospitalId);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            try
+            {
+                con.Open();
+                sd.Fill(dt);
+                con.Close();
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PatientList.Add(
+                        new Patient
+                        {
+                            Patient_Id = Convert.ToInt32(dr["Patient_id"]),
+                            FirstName = Convert.ToString(dr["Patient_FName"]),
+                            LastName = Convert.ToString(dr["Patient_LName"]),
+                            Hospital_id = Convert.ToInt32(dr["Hospital_id"]),
+                            Doctor_id = Convert.ToInt32(dr["Doctor_id"]),
+                            Gender = Convert.ToString(dr["Patient_Gender"]),
+                            Age = Convert.ToInt32(dr["Patient_Age"]),
+                            Address = Convert.ToString(dr["Patient_Address"]),
+                            PhoneNumber = Convert.ToString(dr["PhoneNumber"]),
+                            Email = Convert.ToString(dr["Email"])
+
+
+                        });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return PatientList;
+        }
+
+
+
         //To Update Patient details    
         public bool UpdatePatient(Patient obj)
         {
@@ -137,6 +187,7 @@ namespace PatientManagementsystem.DAL
             com.Parameters.AddWithValue("@Patient_FName", obj.FirstName);
             com.Parameters.AddWithValue("@Patient_LName", obj.LastName);
             com.Parameters.AddWithValue("@Hospital_id", obj.Hospital_id);
+            com.Parameters.AddWithValue("@Doctor_id", obj.Doctor_id);
             com.Parameters.AddWithValue("@Patient_Gender", obj.Gender);
             com.Parameters.AddWithValue("@Patient_Age", obj.Age);
             com.Parameters.AddWithValue("@Patient_Address", obj.Address);
