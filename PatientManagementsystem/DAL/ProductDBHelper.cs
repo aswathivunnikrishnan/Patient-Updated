@@ -160,24 +160,26 @@ namespace PatientManagementsystem.DAL
             }
         }
 
-        //public bool DeleteData(int id)
-        //{
-        //    Connection();
-        //    SqlCommand cmd = new SqlCommand("DeleteProduct", con)
-        //    {
-        //        CommandType = CommandType.StoredProcedure
-        //    };
+        public bool DeleteData(int id)
+        {
+            Connection();
+            SqlCommand cmd = new SqlCommand("DeleteProduct", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
-        //    cmd.Parameters.AddWithValue("@Product_id", id);
+            cmd.Parameters.AddWithValue("@Product_id", id);
 
-        //    con.Open();
-        //    int i = cmd.ExecuteNonQuery();
-        //    con.Close();
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
 
-        //    if (i >= 1)
-        //        return true;
-        //    else
-        //        return false;
-        //}
+            if (i >= 1)
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using PatientManagementsystem.DAL;
+﻿using EmployeeManagementsystem.DAL;
+using PatientManagementsystem.DAL;
 using PatientManagementsystem.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace PatientManagementsystem.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         // GET: Product
@@ -18,9 +20,11 @@ namespace PatientManagementsystem.Controllers
         }
         // GET: /home/create
         [HttpGet]
-        public ActionResult CreateProduct()
+        public ActionResult CreateProduct(int id)
         {
-            return View();
+            Product product = new Product();
+            product.Hospital_id = id;
+            return View(product);
         }
         //GET: /home/create
         [HttpPost]
@@ -38,14 +42,16 @@ namespace PatientManagementsystem.Controllers
                     return RedirectToAction("Index", "Product", new { id = p.Hospital_id });
                 }
                 else
-                    return View();
+                    return View(p);
 
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
-                return View();
+                ModelState.AddModelError("", message);
+                return View(p);
             }
+
         }
 
         //Get :
@@ -110,6 +116,39 @@ namespace PatientManagementsystem.Controllers
             {
                 ViewData["Final"] = "Final excecuted!";
             }
+        }
+
+        public ActionResult Delete(int id)
+        {
+
+            ProductDBHelper helper = new ProductDBHelper();
+            Product objProduct = helper.GetProductById(id);
+            return View(objProduct);
+
+        }
+
+
+
+        [HttpPost]
+
+        public ActionResult Delete(int id, Product Product)
+        {
+            bool result = false;
+            try
+            {
+                ProductDBHelper objDBHandle = new ProductDBHelper();
+                ProductDBHelper helper = new ProductDBHelper();
+                Product objProduct = helper.GetProductById(id);
+                result = objDBHandle.DeleteData(id);
+                TempData["msg"] = "<script>alert('Product Deleted Successfully')</script>";
+                return RedirectToAction("Index", "Product", new { id = objProduct.Hospital_id });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message + ex.StackTrace);
+                return View();
+            }
+
         }
     }
 }

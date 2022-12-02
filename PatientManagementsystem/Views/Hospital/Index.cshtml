@@ -46,7 +46,7 @@
 
                 "columns": [
 
-                    { 'data': 'Hospital_Id' },
+                    { 'data': 'Hospital_Id', 'render': function (data) { return "HMS00" + data } },
                     { 'data': 'Hospital_Name' },
                     { 'data': 'StateName' },
                     { 'data': 'District' },
@@ -54,7 +54,7 @@
                     { 'data': 'Office_PhoneNumber' },
                     {
                         'data': 'Hospital_Id', 'render': function (data) {
-                            return '<a class="orenge" title="edit" onclick="editHospital(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a> <a class="green" title="gotoDashboard" onclick="getHospitalPage(' + data + ')" > <span class="glyphicon glyphicon-chevron-right"></span></a>';
+                            return '<a class="orenge" title="edit" onclick="editHospital(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a> ';
                         }
                     }
 

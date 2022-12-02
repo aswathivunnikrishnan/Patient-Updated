@@ -8,10 +8,11 @@ using System.Web.Mvc;
 
 namespace PatientManagementsystem.Controllers
 {
+    [Authorize]
     public class HospitalController : Controller
     {
         // GET: Hospital
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SUPERADMIN")]
         public ActionResult Index()
         {
             return View();

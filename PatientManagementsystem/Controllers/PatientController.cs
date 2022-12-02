@@ -7,27 +7,38 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor.Tokenizer;
+using System.Web.Security;
 using System.Web.Services.Description;
 
 namespace PatientManagementsystem.Controllers
 {
-   
+
+    //[Authorize]
     public class PatientController : Controller
     {
         loginDBHelper edb = new loginDBHelper();
         // GET: Patient
+        
         public ActionResult Index(int id)
         {
             ViewBag.Hos_Id = id;
             return View();
         }
 
+
         // GET: /home/create
+        //[Authorize(Roles = "Admin,Patient")]
+
         [HttpGet]
-        public ActionResult CreatePatient()
+        public ActionResult CreatePatient(int id)
         {
-            return View();
+            Patient patient = new Patient();
+            patient.Hospital_id = id;
+            return View(patient);
         }
+
+        //[Authorize(Roles = "Admin,Patient")]
+
         //GET: /home/create
         [HttpPost]
         public ActionResult CreatePatient(Patient p)
@@ -44,18 +55,52 @@ namespace PatientManagementsystem.Controllers
                     return RedirectToAction("Index", "Patient", new { id = p.Hospital_id });
                 }
                 else
-                    return View();
-            
+                    return View(p);
+
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
-                return View();
+                ModelState.AddModelError("", message);
+                return View(p);
             }
+
+        }
+        [HttpGet]
+        public ActionResult Appointment()
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Appointment(Patient p)
+        {
+            bool result = false;
+            PatientDBHelper helper = new PatientDBHelper();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    result = helper.CreatePatientDetails(p);
+                    ModelState.Clear();
+                    TempData["msg"] = "<script>alert('Patient Created Successfully')</script>";
+                    return RedirectToAction("Index", "Patient", new { id = p.Hospital_id });
+                }
+                else
+                    return View(p);
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                ModelState.AddModelError("", message);
+                return View(p);
+            }
+
         }
 
         //Get :
-        
+
         public ActionResult GetAll(int id)
         {
 
@@ -81,8 +126,8 @@ namespace PatientManagementsystem.Controllers
             
         }
 
-       
 
+     
         public ActionResult Edit(int id)
         {
             PatientDBHelper objDBHandle = new PatientDBHelper();
@@ -134,16 +179,17 @@ namespace PatientManagementsystem.Controllers
         }
 
 
+        
         public ActionResult Delete(int id)
         {
            
                 PatientDBHelper helper = new PatientDBHelper();
                 Patient objPatient = helper.GetPatientById(id);
-                return View("Delete", objPatient);
+                return View(objPatient);
 
         }
 
-
+        
         [HttpPost]
         public ActionResult Delete(int id, Patient patient)
         {

@@ -17,7 +17,8 @@ namespace PatientManagementsystem.Models
        
         public string Password { get; set; }
 
-    
+        [Display(Name = "Hospital Name")]
+
         public int HospitalID { get; set; }
         public SelectList HospitalName{ get; set; }
        

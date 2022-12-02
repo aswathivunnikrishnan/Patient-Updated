@@ -8,7 +8,7 @@ namespace PatientManagementsystem.Models
 {
     public class Hospital
     {
-        [Required]
+      
         public int Hospital_Id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]

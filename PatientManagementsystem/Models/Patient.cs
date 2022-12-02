@@ -8,7 +8,7 @@ namespace PatientManagementsystem.Models
 {
     public class Patient
     {
-        [Required]
+        
         public int Patient_Id { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]

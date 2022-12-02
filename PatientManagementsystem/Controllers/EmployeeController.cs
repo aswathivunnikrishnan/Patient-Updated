@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementsystem.DAL;
+using PatientManagementsystem.DAL;
 using PatientManagementsystem.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace EmployeeManagementsystem.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         // GET: Employee
@@ -53,13 +55,14 @@ namespace EmployeeManagementsystem.Controllers
 
                 }
                 else
-                    return View();
+                    return View(e);
 
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
-                return View();
+                ModelState.AddModelError("",message);
+                return View(e);
             }
         }
 
@@ -99,6 +102,14 @@ namespace EmployeeManagementsystem.Controllers
 
         }
 
+        public ActionResult GetProfile()
+        {
+            string user=HttpContext.User.Identity.Name;
+            loginDBHelper profile = new loginDBHelper();
+             Employee x=profile.GetEmployeeByUserName(user);
+
+            return PartialView("Profile",x);
+        }
         public ActionResult Edit(int id)
         {
             EmployeeDBHelper objDBHandle = new EmployeeDBHelper();
@@ -195,7 +206,7 @@ namespace EmployeeManagementsystem.Controllers
 
             EmployeeDBHelper helper = new EmployeeDBHelper();
             Employee objEmployee = helper.GetEmployeeById(id);
-            return View("Delete", objEmployee);
+            return View(objEmployee);
 
         }
 

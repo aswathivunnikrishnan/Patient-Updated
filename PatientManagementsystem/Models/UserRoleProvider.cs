@@ -53,9 +53,13 @@ namespace PatientManagementsystem.Models
             {
                 role.Add("Doctor");
             }
-            else
+            else if (employee.Designation == "PHARMACIST")
             {
                 role.Add("Pharmacist");
+            }
+            else
+            {
+                role.Add("Patient");
             }
             return role.ToArray();
         }

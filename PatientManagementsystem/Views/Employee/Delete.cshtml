@@ -51,16 +51,29 @@
             @Html.DisplayFor(model => model.Designation)
         </dd>
 
-        
-     
+
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Index", "Index","Employee")
+        <div class="form-actions ">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a onclick="GotoEmployeeIndex()">
+            <span class="nav-text">Back to list</span>
+            </a>
+    @* @Html.ActionLink("Back to Index", "Index", "Employee", new { id = ViewBag.Hos_Id })*@
         </div>
     }
-</div>
+    </div>
+
+
+
+<script>
+    function GotoEmployeeIndex() {
+        window.location.href = "@Url.Action("Index", "Employee")" + "/" + @Model.HospitalId ;
+    }
+
+</script>

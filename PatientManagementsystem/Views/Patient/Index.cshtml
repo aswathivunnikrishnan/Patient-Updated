@@ -6,9 +6,13 @@
 
 <h2>Patients</h2>
 
-<p>
-    @Html.ActionLink("Create New", "CreatePatient")
-</p>
+@if (User.IsInRole("Admin") || User.IsInRole("SUPERADMIN"))
+{
+    <p>
+        @Html.ActionLink("Create New", "CreatePatient", new { id = @ViewBag.Hos_Id })
+    </p>
+}
+
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +56,7 @@
 
                 "columns": [
 
-                    { 'data': 'Patient_Id' },
+                    { 'data': 'Patient_Id', 'render': function (data) { return "P-00" + data } },
                     { 'data': 'FirstName' },
                     { 'data': 'LastName' },
                     { 'data': 'Hospital_id' },
@@ -61,6 +65,7 @@
                     { 'data': 'Address' },
                     { 'data': 'PhoneNumber' },
                     { 'data': 'Email' },
+
                     {
                         'data': 'Patient_Id', 'render': function (data) {
                             return '<a class="orenge" title="Edit" onclick="editGetPatient(' + data + ')" > <span class="glyphicon glyphicon-edit"></span></a>  <a class="red" title="Delete"  onclick="Delete(' + data + ')"> <span class="glyphicon glyphicon-trash"></span></a>';
@@ -107,5 +112,20 @@
         cursor: pointer;
     }
 </style>
+
+<div>
+
+    <a onclick="GotoDashBoard()">
+
+        <span class="nav-text">Back to DashBoard</span>
+    </a>
+</div>
+
+<script>
+    function GotoDashBoard() {
+        window.location.href = "@Url.Action("DashBoard", "Admin")" + "/" + @ViewBag.Hos_Id ;
+    }
+
+</script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

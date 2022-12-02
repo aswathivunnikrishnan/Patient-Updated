@@ -50,8 +50,11 @@ namespace PatientManagementsystem.Controllers
                             FormsAuthentication.SetAuthCookie(loginview.UserName, true);
                             return RedirectToAction("DashBoard", "Admin",new {id=emp.HospitalId, name = hos.Hospital_Name });
                         }
+                        else if(loginview.HospitalID==0)
+                            ModelState.AddModelError("", "Please select Hospital");
+
                         else
-                            ModelState.AddModelError("", "Invalid Hospital id");
+                            ModelState.AddModelError("", "Invalid Hospital Name");
                     }
                     else
                     {
