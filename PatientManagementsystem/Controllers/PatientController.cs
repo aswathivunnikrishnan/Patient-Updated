@@ -79,15 +79,16 @@ namespace PatientManagementsystem.Controllers
             PatientDBHelper helper = new PatientDBHelper();
             try
             {
-                if (ModelState.IsValid)
-                {
-                    result = helper.CreatePatientDetails(p);
-                    ModelState.Clear();
-                    TempData["msg"] = "<script>alert('Patient Created Successfully')</script>";
-                    return RedirectToAction("Index", "Patient", new { id = p.Hospital_id });
-                }
-                else
-                    return View(p);
+                result = helper.CreatePatientDetails(p);
+                ModelState.Clear();
+                TempData["msg"] = "<script>alert('Your Appoinment is confirmed')</script>";
+                return RedirectToAction("Login", "Login");
+                //if (ModelState.IsValid)
+                //{
+
+                //}
+                //else
+                //    return View(p);
 
             }
             catch (Exception ex)

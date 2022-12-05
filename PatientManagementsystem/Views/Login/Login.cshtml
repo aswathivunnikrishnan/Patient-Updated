@@ -11,40 +11,40 @@
     @Html.AntiForgeryToken()
 
     <!--<div class="form-horizontal">-->
-        @*<h4>login</h4>*@
-        <!--<hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
+    @*<h4>login</h4>*@
+    <!--<hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", Type = "Password" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", Type = "Password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HospitalID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">-->
-                @*@Html.DropDownListFor(model => model.HospitalID, new SelectList(new[]
-                     {
-                        "TSC HOSPITAL",
-                        "ASD Hospital",
-                        "Almas Hospital",
-                        "MIMS Hospital",
-                        "SAFA Policlinic",
-                        "KIMS Hospital"
+    <div class="form-group">
+        @Html.LabelFor(model => model.HospitalID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">-->
+    @*@Html.DropDownListFor(model => model.HospitalID, new SelectList(new[]
+         {
+            "TSC HOSPITAL",
+            "ASD Hospital",
+            "Almas Hospital",
+            "MIMS Hospital",
+            "SAFA Policlinic",
+            "KIMS Hospital"
 
-                    }), "---- Select One ----", new { @class = "form-control" })*@
+        }), "---- Select One ----", new { @class = "form-control" })*@
 
-                <!--@Html.DropDownListFor(model => model.H_Name, Model.HospitalName, "---- Select One ----", new { @class = "form-control" })
+    <!--@Html.DropDownListFor(model => model.H_Name, Model.HospitalName, "---- Select One ----", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.H_Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,80 +66,94 @@
 
 
 
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
 
-                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <div class="mb-md-5 mt-md-4 pb-5">
 
-                            <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                            <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
-                            <div class="form-horizontal">
-                                @*<h4>login</h4>*@
-                                <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @*@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" , @placeHolder="User Name"})*@
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeHolder = "User Name" } })
-                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                <div class="form-horizontal">
+                                    @*<h4>login</h4>*@
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" , @placeHolder="User Name"})*@
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeHolder = "User Name" } })
+                                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", Type = "Password", @placeHolder = "Password" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.HospitalID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-10">
+                                            @Html.DropDownListFor(model => model.H_Name, Model.HospitalName, "---- Select One ----", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.H_Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-offset-2 col-md-10 ">
+                                            <input type="submit" value="Login" />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", Type = "Password", @placeHolder = "Password" } })
-                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @*@Html.LabelFor(model => model.HospitalID, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                    <div class="col-md-10">
-                                        @Html.DropDownListFor(model => model.H_Name, Model.HospitalName, "---- Select One ----", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.H_Name, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-md-offset-2 col-md-10 ">
-                                        <input type="submit" value="Login" />
-                                    </div>
-                                </div>
                             </div>
 
-                        </div>
+                            <div>
+                                <div style="margin-left: -50px; margin-top : 5px;">
+                                    <input type="" onclick="appointment()" value="Appointment" class="btn btn-default" style="color:white" />
+                                </div>
 
-                        <div>
-                            <div style="margin-left: -50px; margin-top : 5px;">
-                                <input type="" onclick="appointment()" value="Appointment" class="btn btn-default" style="color:white" />
-                            </div>
-
-                            @*<a onclick="GotoDashBoard()">
-                                <span class="text-white-50 fw-bold">
-                                    Appointment
-                                </span></a>*@
+                                @*<a onclick="GotoDashBoard()">
+                                    <span class="text-white-50 fw-bold">
+                                        Appointment
+                                    </span></a>*@
                                 @*<p class="mb-0">
-                                    Don't have an account? <a href="#!" class="text-white-50 fw-bold">Appointment</a>
-                                </p>*@
-                        </div>
+                                        Don't have an account? <a href="#!" class="text-white-50 fw-bold">Appointment</a>
+                                    </p>*@
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        <div>
+
+        </div>
+    </section>
 }
 <script>
+    //function btntest() {
+    //    toastr.info('Are you the 6 fingered man?')
+    //}
 function appointment(){
         window.location.href = "@Url.Action("Appointment", "Patient")";
         }
 
 </script>
+@if (TempData["error"] != null)
+{
+    @Html.Raw(TempData["error"]);
+}
+@if (TempData["msg"] != null)
+{
+    @Html.Raw(TempData["msg"]);
+}
